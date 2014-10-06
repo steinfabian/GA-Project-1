@@ -2,7 +2,9 @@
 
 <!-- Show all available products from the database -->
 
-<p><%= @products.first.product_name %></p>
+<% @products.each do |product| %>
+<p><%= product.product_name %></p>
+<% end %>
 
 <a href="/order/:id">link to product 1</a>
 
