@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root :to => 'swimwear#index'
 
 #Show user product details and enable to customise parameters which will be stored in order database 
-  get '/order/:id' => 'order#new'
+  get '/order/:id' => 'order#new', as: :customise
 
 #Write user's customisation data into order database and forward to checkout page
   post '/order/:id' => 'order#create'
