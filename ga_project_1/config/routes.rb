@@ -3,18 +3,27 @@ Rails.application.routes.draw do
 #Send user to path '/swimwear' which displays all available products user can select from
   root :to => 'swimwear#index'
 
-#Show user product details and enable to customise parameters which will be stored in order database 
+#Show user product details and enable to customise parameters
   get '/order/:id' => 'order#new', as: :customise
 
-#Write user's customisation data into order database and forward to checkout page
+#Write user's customisation data into order database
   post '/order/:id' => 'order#create'
 
 #Get checkout input from user and update order database
   get '/order/:id/checkout' => 'order#checkout'
   post '/order/:id' => 'order#update'
 
-#Show an order confirmation page to the user
+#Show order confirmation page to user
   get 'order/:id/confirmation' => 'order#confirmation'
+
+#To add/adjust:
+# - get '/login' => 'user#login' 
+# - adjust: get checkout page after user is logged in
+# - get '/register' => user#new_account' 
+# - post '/register' => user#create_account
+# - get account page (show)
+# - get account edit page
+# - post account page (update)
 
 
 end

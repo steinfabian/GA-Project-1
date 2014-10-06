@@ -4,7 +4,4 @@ class SwimwearController < ApplicationController
 		@products = Product.all #retrieve all existing products from the database
 	end
 
-	def show
-	end
-
 end
