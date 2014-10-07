@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 #Send user to path '/swimwear' which displays all available products user can select from
   root :to => 'swimwear#index'
 
+#Show a list of all orders. 
+  get 'order/all' => 'order#index'
+
 #Show user product details and enable to customise parameters
   get '/order/:product_id' => 'order#new', as: :customise
 
@@ -16,24 +19,28 @@ Rails.application.routes.draw do
 #Show order confirmation page to user
   get 'order/:id/confirmation' => 'order#confirmation'
 
+
+
 #To add/adjust:
 
-# Prompt user to log in
-# - get '/login' => 'customers#login' 
+# Prompt user to log in and enable to log out
+get '/login' => 'session#new'
+post '/login' => 'session#create'
+delete '/login' => 'session#destroy' 
 
 # Adjust: get checkout page after user is logged in
 
 #Show user registration form
-get '/register' => 'customers#new' #, as: :customers
+get '/register' => 'customers#new', as: :customers
 
 # Write user's account data into database 
 post '/register' => 'customers#create'
 
 # Show user account page
-get '/account/:id' => 'customers#show'
+get '/account/:id' => 'customers#show', as: :account
 
 # Show user account edit form
-get '/account/:id/edit' => 'customers#edit'
+get '/account/:id/edit' => 'customers#edit', as: :edit
 
 # Write user's updated account data into database
 patch '/account/:id' => 'customers#update', as: :customer

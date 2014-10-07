@@ -6,7 +6,7 @@ class OrderController < ApplicationController
 
 	def create
 		@order = Order.create order_params
-		redirect_to checkout_path(@order.id)
+		redirect_to login_path
 	end
 
 	def checkout
@@ -16,6 +16,10 @@ class OrderController < ApplicationController
 	end
 
 	def confirmation
+	end
+
+	def index
+		@orders = Order.all
 	end
 
 	private
