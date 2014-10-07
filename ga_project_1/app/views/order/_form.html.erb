@@ -1,0 +1,4 @@
+<%= form_for @order do |f| %>
+<%= f.label :top_size, 'select your top size' %>
+<%= f.select :top_size, options_for_select([['Large','3'],['Medium','2'],['Small','1']]) %>
+<% end %>

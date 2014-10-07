@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   root :to => 'swimwear#index'
 
 #Show user product details and enable to customise parameters
-  get '/order/:id' => 'order#new', as: :customise
+  get '/order/:product_id' => 'order#new', as: :customise
 
 #Write user's customisation data into order database
-  post '/order/:id' => 'order#create'
+  post '/order/:product_id' => 'order#create', as: :orders
 
 #Get checkout input from user and update order database
   get '/order/:id/checkout' => 'order#checkout'
@@ -17,13 +17,26 @@ Rails.application.routes.draw do
   get 'order/:id/confirmation' => 'order#confirmation'
 
 #To add/adjust:
+
+# Prompt user to log in
 # - get '/login' => 'user#login' 
-# - adjust: get checkout page after user is logged in
-# - get '/register' => user#new_account' 
-# - post '/register' => user#create_account
-# - get account page (show)
-# - get account edit page
-# - post account page (update)
+
+# Adjust: get checkout page after user is logged in
+
+# Show user registration form
+# - get '/register' => user#new'
+
+# Write user's account data into database 
+# - post '/register' => user#create
+
+# Show user account page
+# - get '/account' => user#show
+
+# Show user account edit form
+# - get '/account/edit => user#edit
+
+# Write user's updated account data into database
+# - post '/account' => user#update
 
 
 end

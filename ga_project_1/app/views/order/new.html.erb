@@ -1,51 +1,7 @@
 <p>customise a new order here</p>
 
+<%= render :partial => 'form' %>
 
-<!-- Implement drop-downs for user to select sizes and colours-->
-<form method='post' action='/order/:id'>
-	<ul>
-		<li>
-			<label for="top_size">Select your top size</label>
-			<select>
-				<option value=""><option>
-				<option class="dropdown" name="top_size" value="S" placeholder="Size">S</option>
-				<option class="dropdown" name="top_size" value="M" placeholder="Size">M</option>
-				<option class="dropdown" name="top_size" value="L" placeholder="Size">L</option>
-				<option class="dropdown" name="top_size" value="XL" placeholder="Size">XL</option>
-			</select>
-		</li>
-	
-		<li>
-			<label for="top_style">Select your top style</label>
-			<select>
-				<option value=""><option>
-				<option class="dropdown" name="top_colour" value="red" placeholder="Style">Red</option>
-				<option class="dropdown" name="top_colour" value="blue" placeholder="Style">Blue</option>
-			</select>
-		</li>
 
-		<li>
-			<label for="bottom_size">Select your bottom size</label>
-			<select>
-				<option value=""><option>
-				<option class="dropdown" name="bottom_size" value="S" placeholder="Size">S</option>
-				<option class="dropdown" name="bottom_size" value="M" placeholder="Size">M</option>
-				<option class="dropdown" name="bottom_size" value="L" placeholder="Size">L</option>
-				<option class="dropdown" name="bottom_size" value="XL" placeholder="Size">XL</option>
-			</select>
-		</li>
-
-		<li>
-			<label for="bottom_style">Select your bottom style</label>
-			<select>
-				<option value=""><option>
-				<option class="dropdown" name="bottom_colour" value="red" placeholder="Style">Red</option>
-				<option class="dropdown" name="bottom_colour" value="blue" placeholder="Style">Blue</option>
-			</select>
-		</li>
-
-	<button>Purchase</button>
-</ul>
-</form>
 
 <a href="/order/:id/checkout">proceed to checkout</a>

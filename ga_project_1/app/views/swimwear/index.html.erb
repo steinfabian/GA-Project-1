@@ -3,9 +3,7 @@
 <!-- Show all available products from the database -->
 
 <% @products.each do |product| %>
-<p><%= product.product_name %></p>
+<ul>
+    <li><%= link_to(product.product_name, customise_path(product)) %></li>
+</ul>
 <% end %>
-
-
-
-<!-- implement link_to. Find out how refer to right path. they are not named yet. -->
