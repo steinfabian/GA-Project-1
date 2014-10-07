@@ -5,7 +5,8 @@ class OrderController < ApplicationController
 	end
 
 	def create
-		@order = Order.new order_params
+		@order = Order.create order_params
+		redirect_to checkout_path(@order.id)
 	end
 
 	def checkout

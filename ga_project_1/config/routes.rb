@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/order/:product_id' => 'order#create', as: :orders
 
 #Get checkout input from user and update order database
-  get '/order/:id/checkout' => 'order#checkout'
+  get '/order/:id/checkout' => 'order#checkout', as: :checkout
   post '/order/:id' => 'order#update'
 
 #Show order confirmation page to user
@@ -19,24 +19,24 @@ Rails.application.routes.draw do
 #To add/adjust:
 
 # Prompt user to log in
-# - get '/login' => 'user#login' 
+# - get '/login' => 'customers#login' 
 
 # Adjust: get checkout page after user is logged in
 
-# Show user registration form
-# - get '/register' => user#new'
+#Show user registration form
+get '/register' => 'customers#new' #, as: :customers
 
 # Write user's account data into database 
-# - post '/register' => user#create
+post '/register' => 'customers#create'
 
 # Show user account page
-# - get '/account' => user#show
+get '/account/:id' => 'customers#show'
 
 # Show user account edit form
-# - get '/account/edit => user#edit
+get '/account/:id/edit' => 'customers#edit'
 
 # Write user's updated account data into database
-# - post '/account' => user#update
+patch '/account/:id' => 'customers#update', as: :customer
 
 
 end
