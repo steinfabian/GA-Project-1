@@ -13,6 +13,10 @@
 
 <%= link_to 'Edit', edit_path(@customer) %>
 
+<%= form_tag login_path, :method => :delete do %>
+<button>Logout</button>
+<% end %>
+
 
 <h3>These are your past orders:</h3>
 <!-- List orders. Find orders with this customer ID and display Order ID, date, and order specifications-->

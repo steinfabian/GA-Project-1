@@ -17,6 +17,7 @@ class CustomersController < ApplicationController
 
 	def show
 		@customer = Customer.find params[:id]
+		#define variable that looks up all order from customer with this id which have status confirmed
 	end
 
 	def edit

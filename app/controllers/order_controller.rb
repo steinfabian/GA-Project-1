@@ -8,11 +8,11 @@ class OrderController < ApplicationController
 		@order = Order.create order_params
 		@order.update :status => 'pending'
 		session[:order_id] = @order.id
-		#if @customer = @current_customer
-			#redirect_to checkout_path session[:order_id]
-		#else
+		if @customer = @current_customer
+			redirect_to checkout_path session[:order_id]
+		else
 			redirect_to login_path
-		#end
+		end
 	end
 
 	def checkout
@@ -20,6 +20,7 @@ class OrderController < ApplicationController
 	end
 
 	def complete
+		@customer = Customer.find session[:customer_id]
 		@order = Order.find session[:order_id]
 		@order.update :status => 'confirmed'
 	end

@@ -1,5 +1,6 @@
 <h2>Order summary</h2>
 
+<p>Customer number: <%= @customer.id %></p>
 <p><%= @customer.first_name %></p>
 <p><%= @customer.last_name %></p>
 <p>Unit number: </p>
@@ -10,7 +11,8 @@
 <p><%= @customer.suburb %></p>
 <p><%= @customer.postcode%></p>
 
+
 <%= form_tag '/complete' do %>
-<button>Purchase</button>
+<button>Buy Now</button>
 <% end %>
 
