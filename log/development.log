@@ -22097,3 +22097,65 @@ Processing by OrderController#checkout as HTML
   [1m[35mCustomer Load (0.2ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 6 LIMIT 1
   Rendered order/checkout.html.erb within layouts/application (0.4ms)
 Completed 200 OK in 176ms (Views: 172.3ms | ActiveRecord: 0.2ms)
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (8.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateCustomers (20141006010626)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (7.6ms)[0m  [1mCREATE TABLE "customers" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "unit_number" character varying(255), "street_number" character varying(255), "suburb" character varying(255), "postcode" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (4.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141006010626"]]
+  [1m[36m (10.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOrders (20141006013923)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (12.1ms)[0m  [1mCREATE TABLE "orders" ("id" serial primary key, "customer_id" integer, "top_size" character varying(255), "top_colour" character varying(255), "bottom_size" character varying(255), "bottom_colour" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (3.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141006013923"]]
+  [1m[36m (16.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateProducts (20141006015108)
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36m (21.1ms)[0m  [1mCREATE TABLE "products" ("id" serial primary key, "product_name" character varying(255), "image" text, "price" float, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (3.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141006015108"]]
+  [1m[36m (3.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOrdersProducts (20141006020749)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "orders_products" ("order_id" integer, "product_id" integer) [0m
+  [1m[35mSQL (2.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141006020749"]]
+  [1m[36m (4.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddStreetNameToCustomers (20141008013656)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mALTER TABLE "customers" ADD COLUMN "street_name" character varying(255)[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141008013656"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+Migrating to AddStatusToOrders (20141008014049)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "orders" ADD COLUMN "status" character varying(255)[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141008014049"]]
+  [1m[36m (4.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (2.9ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mCustomer Load (0.7ms)[0m  SELECT "customers".* FROM "customers"
+  [1m[36mOrder Load (0.6ms)[0m  [1mSELECT "orders".* FROM "orders"[0m
+  [1m[35mProduct Load (1.2ms)[0m  SELECT "products".* FROM "products"
+  [1m[36m (4.9ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "customers" ("created_at", "email", "first_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-10-08 06:18:23.197514"], ["email", "anna@a.com"], ["first_name", "Anna"], ["password_digest", "$2a$10$O9zrcHTde6G/SenQ5NAjxOu/KuYaa0teN8c9yG9LwZTi.z/upUF5u"], ["updated_at", "2014-10-08 06:18:23.197514"]]
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "customers" ("created_at", "email", "first_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-10-08 06:18:23.351477"], ["email", "amanda@a.com"], ["first_name", "Amanda"], ["password_digest", "$2a$10$WhQ1iq9H4QEAiTx6JGaftOF8lbmIsZ2chWLQZWOZ774V8gwFoXMka"], ["updated_at", "2014-10-08 06:18:23.351477"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "customers" ("created_at", "email", "first_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-10-08 06:18:23.477287"], ["email", "paula@a.com"], ["first_name", "Paula"], ["password_digest", "$2a$10$/1aJpBi.dUShHXnQVsBm1ukK51uy0.vg77YpMAxhor97yEphyKroe"], ["updated_at", "2014-10-08 06:18:23.477287"]]
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "products" ("created_at", "product_name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-10-08 06:18:23.495160"], ["product_name", "Triangle"], ["updated_at", "2014-10-08 06:18:23.495160"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "products" ("created_at", "product_name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-10-08 06:18:23.502967"], ["product_name", "Bandeau"], ["updated_at", "2014-10-08 06:18:23.502967"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-08 17:18:58 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (5.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SwimwearController#index as HTML
+  [1m[35mCustomer Load (1.0ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 6 LIMIT 1
+  [1m[36mProduct Load (3.4ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered swimwear/index.html.erb within layouts/application (178.7ms)
+Completed 200 OK in 503ms (Views: 362.0ms | ActiveRecord: 25.7ms)
