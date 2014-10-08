@@ -10,6 +10,7 @@
 #  bottom_colour :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  status        :string(255)
 #
 
 class Order < ActiveRecord::Base

@@ -13,10 +13,11 @@
 #  postcode        :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  street_name     :string(255)
 #
 
 class Customer < ActiveRecord::Base
-	# has_secure_password
+	has_secure_password
   	has_many :orders
 
   	# validates :first_name, :presence => true, :uniqueness => true, :length => {:minimum => 2}

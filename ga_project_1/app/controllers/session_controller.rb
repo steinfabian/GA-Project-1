@@ -9,9 +9,9 @@ class SessionController < ApplicationController
     customer = Customer.where(:email => params[:email]).first
     if customer.present? && customer.authenticate(params[:password])
       session[:customer_id] = customer.id
-      redirect_to checkout_path
+      redirect_to checkout_path session[:order_id]
     else
-      redirect_to checkout_path
+      redirect_to login_path
     end
   end
 

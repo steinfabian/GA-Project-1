@@ -3,9 +3,9 @@ Order.destroy_all
 Product.destroy_all
 
 
-c1 = Customer.create(:first_name => 'Anna')
-c2 = Customer.create(:first_name => 'Amanda')
-c3 = Customer.create(:first_name => 'Paula')
+c1 = Customer.create(:first_name => 'Anna', :password => 'test', :password_confirmation => 'test', :email => 'anna@a.com')
+c2 = Customer.create(:first_name => 'Amanda', :password => 'test', :password_confirmation => 'test', :email => 'amanda@a.com')
+c3 = Customer.create(:first_name => 'Paula', :password => 'test', :password_confirmation => 'test', :email => 'paula@a.com')
 
 p1 = Product.create(:product_name => 'Triangle') 
 p2 = Product.create(:product_name => 'Bandeau')

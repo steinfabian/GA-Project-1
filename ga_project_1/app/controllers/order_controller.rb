@@ -6,16 +6,22 @@ class OrderController < ApplicationController
 
 	def create
 		@order = Order.create order_params
-		redirect_to login_path
+		@order.update :status => 'pending'
+		session[:order_id] = @order.id
+		#if @customer = @current_customer
+			#redirect_to checkout_path session[:order_id]
+		#else
+			redirect_to login_path
+		#end
 	end
 
 	def checkout
+		@customer = @current_customer
 	end
 
-	def update
-	end
-
-	def confirmation
+	def complete
+		@order = Order.find session[:order_id]
+		@order.update :status => 'confirmed'
 	end
 
 	def index

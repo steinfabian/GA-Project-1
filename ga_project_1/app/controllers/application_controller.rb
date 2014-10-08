@@ -3,5 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+
+  before_action :authenticate_customer
+
+  private
+  def authenticate_customer
+    @current_customer = Customer.find_by(:id => session[:customer_id])
+    session[:customer_id] = nil unless @current_customer.present?
+  end
   
 end

@@ -6,7 +6,13 @@ class CustomersController < ApplicationController
 
 	def create
 		@customer = Customer.create customer_params
-		redirect_to root_path
+		session[:customer_id] = @customer.id
+		if session[:order_id]
+	        order = Order.find session[:order_id]
+	        order.customer_id = customer.id
+	        order.save
+      	end
+		redirect_to checkout_path session[:order_id]
 	end
 
 	def show
@@ -28,7 +34,7 @@ class CustomersController < ApplicationController
 
 	private
 	def customer_params
-		params.require(:customer).permit(:first_name, :last_name, :email, :password_digest, :unit_number, :street_number, :suburb, :postcode)
+		params.require(:customer).permit(:first_name, :last_name, :email, :password_digest, :unit_number, :street_number, :street_name, :suburb, :postcode)
 	end
 
 end

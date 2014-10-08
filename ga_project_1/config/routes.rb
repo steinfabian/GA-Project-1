@@ -45,6 +45,7 @@ get '/account/:id/edit' => 'customers#edit', as: :edit
 # Write user's updated account data into database
 patch '/account/:id' => 'customers#update', as: :customer
 
+post '/complete' => 'order#complete'
 
 end
 
