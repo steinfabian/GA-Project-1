@@ -2,10 +2,12 @@
 
 <p><%= @customer.first_name %></p>
 <p><%= @customer.last_name %></p>
+<p>Unit number: </p>
 <p><%= @customer.unit_number %></p>
+<p>Street number: </p>
 <p><%= @customer.street_number %></p>
-<p><%= @customer.street_name%></p>
-<p><%= @customer.suburb%></p>
+<p><%= @customer.street_name %></p>
+<p><%= @customer.suburb %></p>
 <p><%= @customer.postcode%></p>
 
 <%= form_tag '/complete' do %>

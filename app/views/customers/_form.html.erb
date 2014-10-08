@@ -8,15 +8,18 @@
 	<%= f.text_field :unit_number %>
 <li><%= f.label :street_number, 'Street number' %>
 	<%= f.text_field :street_number %>
+<li><%= f.label :street_name, 'Street name' %>
+	<%= f.text_field :street_name %>
 <li><%= f.label :suburb, 'Suburb' %>
 	<%= f.text_field :suburb %>
 <li><%= f.label :postcode, 'Postcode' %>
 	<%= f.text_field :postcode %>
 <li><%= f.label :email, 'Email' %>
 	<%= f.text_field :email %>
-<li><%= f.label :password_digest, 'Password' %>
-	<%= f.text_field :password_digest %>
-
+<li><%= f.label :password, 'Password' %>
+	<%= f.password_field :password%>
+<li><%= f.label :password_confirmation, 'Password confirmation' %>
+	<%= f.password_field :password_confirmation %>
 </ul>
 <button>Save</button>
 <% end %>

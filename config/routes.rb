@@ -19,16 +19,10 @@ Rails.application.routes.draw do
 #Show order confirmation page to user
   get 'order/:id/confirmation' => 'order#confirmation'
 
-
-
-#To add/adjust:
-
 # Prompt user to log in and enable to log out
 get '/login' => 'session#new'
 post '/login' => 'session#create'
 delete '/login' => 'session#destroy' 
-
-# Adjust: get checkout page after user is logged in
 
 #Show user registration form
 get '/register' => 'customers#new', as: :customers
@@ -45,6 +39,7 @@ get '/account/:id/edit' => 'customers#edit', as: :edit
 # Write user's updated account data into database
 patch '/account/:id' => 'customers#update', as: :customer
 
+# Show confirmation page
 post '/complete' => 'order#complete'
 
 end
