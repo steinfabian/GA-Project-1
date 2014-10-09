@@ -4,7 +4,7 @@
 <div class="form-group" id="cust_form">
 	<ul>
 		<li><%= f.label :top_size, 'Select your top size', :class => 'cust_label' %>
-			<%= f.select :top_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]), :class => 'cust_select' %>
+			<%= f.select :top_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]) %>
 		<li><%= f.label :top_colour, 'Select your top style', :class => 'cust_label' %>
 			<%= f.select :top_colour, options_for_select([['Geo','Geo'],['Pineapple','Pineapple'],['Tropical','Tropical']]) %>
 		<li><%= f.label :bottom_size, 'Select your bottom size', :class => 'cust_label' %>

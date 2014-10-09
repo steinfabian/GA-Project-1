@@ -38474,3 +38474,54 @@ Processing by OrderController#new as HTML
   Rendered order/_form.html.erb (4.4ms)
   Rendered order/new.html.erb within layouts/application (9.8ms)
 Completed 200 OK in 2075ms (Views: 2062.6ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 17:18:34 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (8.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (3.2ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 1880ms (Views: 1848.9ms | ActiveRecord: 11.6ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 17:18:38 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.3ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (3.3ms)
+  Rendered order/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 158ms (Views: 150.9ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/order/1" for 127.0.0.1 at 2014-10-09 17:18:40 +1100
+Processing by OrderController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "order"=>{"top_size"=>"S", "top_colour"=>"Geo", "bottom_size"=>"S", "bottom_colour"=>"Geo"}, "product_id"=>"1"}
+  [1m[36mCustomer Load (9.8ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35m (1.8ms)[0m  BEGIN
+  [1m[36mSQL (10.8ms)[0m  [1mINSERT INTO "orders" ("bottom_colour", "bottom_size", "created_at", "top_colour", "top_size", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["bottom_colour", "Geo"], ["bottom_size", "S"], ["created_at", "2014-10-09 06:18:40.854006"], ["top_colour", "Geo"], ["top_size", "S"], ["updated_at", "2014-10-09 06:18:40.854006"]]
+  [1m[35m (5.6ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  UPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 55  [["status", "pending"], ["updated_at", "2014-10-09 06:18:40.880309"]]
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mProduct Load (1.4ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO "orders_products" ("order_id", "product_id") VALUES ($1, $2)  [["order_id", 55], ["product_id", 1]]
+  [1m[36m (1.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/login
+Completed 302 Found in 170ms (ActiveRecord: 42.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-10-09 17:18:41 +1100
+Processing by SessionController#new as HTML
+  [1m[35mCustomer Load (4.6ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  Rendered session/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 183ms (Views: 175.1ms | ActiveRecord: 4.6ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2014-10-09 17:18:43 +1100
+Processing by CustomersController#new as HTML
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  Rendered customers/_form.html.erb (9.9ms)
+  Rendered customers/new.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 204ms (Views: 198.6ms | ActiveRecord: 0.5ms)
