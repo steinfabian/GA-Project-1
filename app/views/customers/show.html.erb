@@ -2,6 +2,7 @@
 
 <h3>These are your account details:</h3>
 
+<label>Customer number:</label> <%= @customer.id %></p>
 <label>First name:</label> <%= @customer.first_name %></p>
 <label>Last name:</label> <%= @customer.last_name %></p>
 <label>Email:</label> <%= @customer.email %></p>
@@ -13,14 +14,31 @@
 
 <%= link_to 'Edit', edit_path(@customer) %>
 
-<%= form_tag login_path, :method => :delete do %>
-<button>Logout</button>
-<% end %>
-
-
 <h3>These are your past orders:</h3>
 <!-- List orders. Find orders with this customer ID and display Order ID, date, and order specifications-->
 
+<table>
+  <tr>
+    <th>Order number</th>
+    <th>Date</th>
+    <th>Product</th>
+    <th>Top Size</th>
+    <th>Top Style</th>
+    <th>Bottom Size</th>
+    <th>Bottom Style</th>
+  </tr>
+  <% @order_list.each do |order| %>
+    <tr>
+    <th><%= order.id %></th>
+    <th><%= order.created_at.strftime('%d %B %Y') %></th>
+    <th>Bikini</th>
+    <th><%= order.top_size%> </th>
+    <th><%= order.top_colour%> </th>
+    <th><%= order.bottom_size%> </th>
+    <th><%= order.bottom_colour%> </th>
+  <%end%>
+  </tr>
+</table>
 
 
 

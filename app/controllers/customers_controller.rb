@@ -16,12 +16,14 @@ class CustomersController < ApplicationController
 	end
 
 	def show
-		@customer = Customer.find params[:id]
+		redirect_to login_path unless @current_customer
+		@customer = @current_customer
 		#define variable that looks up all order from customer with this id which have status confirmed
+		@order_list = @customer.orders.where(:status => "confirmed")
 	end
 
 	def edit
-		@customer = Customer.find params[:id]
+		@customer = @current_customer
 	end
 
 	def update

@@ -7,8 +7,11 @@ class OrderController < ApplicationController
 	def create
 		@order = Order.create order_params
 		@order.update :status => 'pending'
+		product = Product.find params[:product_id]
+		@order.products << product
 		session[:order_id] = @order.id
-		if @customer = @current_customer
+		if  @current_customer.present?
+			@order.update :customer_id => @current_customer.id
 			redirect_to checkout_path session[:order_id]
 		else
 			redirect_to login_path

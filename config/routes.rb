@@ -31,7 +31,7 @@ get '/register' => 'customers#new', as: :customers
 post '/register' => 'customers#create'
 
 # Show user account page
-get '/account/:id' => 'customers#show', as: :account
+get '/account' => 'customers#show', as: :account
 
 # Show user account edit form
 get '/account/:id/edit' => 'customers#edit', as: :edit
