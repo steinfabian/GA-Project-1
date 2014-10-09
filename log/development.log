@@ -38030,3 +38030,447 @@ Processing by OrderController#new as HTML
   Rendered order/_form.html.erb (2.8ms)
   Rendered order/new.html.erb within layouts/application (3.7ms)
 Completed 200 OK in 152ms (Views: 144.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/order/1" for 127.0.0.1 at 2014-10-09 16:24:29 +1100
+Processing by OrderController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "order"=>{"top_size"=>"S", "top_colour"=>"Geo", "bottom_size"=>"S", "bottom_colour"=>"Geo"}, "product_id"=>"1"}
+  [1m[35mCustomer Load (14.9ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 15 LIMIT 1
+  [1m[36m (1.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (10.8ms)[0m  INSERT INTO "orders" ("bottom_colour", "bottom_size", "created_at", "top_colour", "top_size", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["bottom_colour", "Geo"], ["bottom_size", "S"], ["created_at", "2014-10-09 05:24:30.419108"], ["top_colour", "Geo"], ["top_size", "S"], ["updated_at", "2014-10-09 05:24:30.419108"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (2.2ms)[0m  [1mUPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 53[0m  [["status", "pending"], ["updated_at", "2014-10-09 05:24:30.493192"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36mProduct Load (3.1ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (722.8ms)[0m  [1mINSERT INTO "orders_products" ("order_id", "product_id") VALUES ($1, $2)[0m  [["order_id", 53], ["product_id", 1]]
+  [1m[35m (7.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "orders" SET "customer_id" = $1, "updated_at" = $2 WHERE "orders"."id" = 53  [["customer_id", 15], ["updated_at", "2014-10-09 05:24:31.356330"]]
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/order/53/checkout
+Completed 302 Found in 1141ms (ActiveRecord: 781.2ms)
+
+
+Started GET "/order/53/checkout" for 127.0.0.1 at 2014-10-09 16:24:31 +1100
+Processing by OrderController#checkout as HTML
+  Parameters: {"id"=>"53"}
+  [1m[35mCustomer Load (4.9ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 15 LIMIT 1
+  [1m[36mOrder Load (8.6ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 53]]
+  Rendered order/checkout.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 237ms (Views: 217.8ms | ActiveRecord: 13.6ms)
+
+
+Started POST "/complete" for 127.0.0.1 at 2014-10-09 16:24:35 +1100
+Processing by OrderController#complete as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw="}
+  [1m[35mCustomer Load (1.2ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 15 LIMIT 1
+  [1m[36mCustomer Load (2.8ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mOrder Load (2.0ms)[0m  SELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1  [["id", 53]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 53  [["status", "confirmed"], ["updated_at", "2014-10-09 05:24:35.916374"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  Rendered order/complete.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 210ms (Views: 179.8ms | ActiveRecord: 7.7ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2014-10-09 16:24:37 +1100
+Processing by CustomersController#show as HTML
+  [1m[35mCustomer Load (4.2ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 15 LIMIT 1
+  [1m[36mOrder Load (5.4ms)[0m  [1mSELECT "orders".* FROM "orders"  WHERE "orders"."customer_id" = $1 AND "orders"."status" = 'confirmed'[0m  [["customer_id", 15]]
+  Rendered customers/show.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 179ms (Views: 164.6ms | ActiveRecord: 9.6ms)
+
+
+Started DELETE "/login" for 127.0.0.1 at 2014-10-09 16:24:51 +1100
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw="}
+  [1m[35mCustomer Load (1.1ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 15 LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:24:52 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (2.7ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.8ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 282ms (Views: 224.3ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:30:23 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (3.9ms)
+  Rendered order/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 193ms (Views: 186.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:30:37 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (1.6ms)
+  Rendered order/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 288ms (Views: 211.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:32:08 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (22.0ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (4.0ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 2488ms (Views: 2448.5ms | ActiveRecord: 26.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:32:14 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (8.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (6.4ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (47.6ms)
+Completed 200 OK in 409ms (Views: 367.7ms | ActiveRecord: 14.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:32:25 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.2ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (5.9ms)
+  Rendered order/new.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 358ms (Views: 338.0ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/order/1" for 127.0.0.1 at 2014-10-09 16:33:11 +1100
+Processing by OrderController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "order"=>{"top_size"=>"S", "top_colour"=>"Geo", "bottom_size"=>"S", "bottom_colour"=>"Geo"}, "product_id"=>"1"}
+  [1m[36mCustomer Load (0.7ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35m (3.8ms)[0m  BEGIN
+  [1m[36mSQL (17.6ms)[0m  [1mINSERT INTO "orders" ("bottom_colour", "bottom_size", "created_at", "top_colour", "top_size", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["bottom_colour", "Geo"], ["bottom_size", "S"], ["created_at", "2014-10-09 05:33:11.303241"], ["top_colour", "Geo"], ["top_size", "S"], ["updated_at", "2014-10-09 05:33:11.303241"]]
+  [1m[35m (12.8ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (2.5ms)[0m  UPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 54  [["status", "pending"], ["updated_at", "2014-10-09 05:33:11.349975"]]
+  [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mProduct Load (1.9ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO "orders_products" ("order_id", "product_id") VALUES ($1, $2)  [["order_id", 54], ["product_id", 1]]
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/login
+Completed 302 Found in 114ms (ActiveRecord: 52.2ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-10-09 16:33:11 +1100
+Processing by SessionController#new as HTML
+  [1m[35mCustomer Load (0.5ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  Rendered session/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 306ms (Views: 297.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:33:17 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.5ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (15.6ms)
+  Rendered order/new.html.erb within layouts/application (16.7ms)
+Completed 200 OK in 240ms (Views: 229.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:40:01 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (5.3ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.9ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (1.9ms)
+  Rendered order/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 2192ms (Views: 2179.0ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:41:40 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (7.2ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.6ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (2.6ms)
+  Rendered order/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 2392ms (Views: 2369.6ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:42:49 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (8.3ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (5.7ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (6.0ms)
+  Rendered order/new.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 281ms (Views: 237.0ms | ActiveRecord: 13.9ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:44:21 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (2.0ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.6ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (3.1ms)
+  Rendered order/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 297ms (Views: 267.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:45:16 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (2.1ms)
+  Rendered order/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 2067ms (Views: 2056.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:45:42 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.7ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (5.4ms)
+  Rendered order/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 229ms (Views: 218.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:46:10 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (1.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (1.9ms)
+  Rendered order/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 2371ms (Views: 2351.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:46:58 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (3.1ms)
+  Rendered order/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 2363ms (Views: 2349.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:47:24 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 205ms (Views: 200.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:48:16 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (1.9ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (3.0ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (6.4ms)
+  Rendered order/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 435ms (Views: 421.0ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:48:17 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 261ms (Views: 250.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:48:37 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.7ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 238ms (Views: 230.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:49:03 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.6ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 2211ms (Views: 2200.3ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:50:34 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (3.0ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.0ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 269ms (Views: 241.2ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:51:07 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (2.2ms)
+  Rendered order/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 208ms (Views: 198.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:51:32 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (9.2ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.8ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 2186ms (Views: 2167.2ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:52:01 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (9.9ms)
+  Rendered order/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 212ms (Views: 205.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:52:26 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (2.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (93.3ms)
+  Rendered order/new.html.erb within layouts/application (94.9ms)
+Completed 200 OK in 2153ms (Views: 2143.2ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:52:37 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (4.8ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.8ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (7.5ms)
+  Rendered order/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 2082ms (Views: 2066.5ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:52:47 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (0.7ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (4.5ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (6.1ms)
+  Rendered order/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 2150ms (Views: 2138.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:53:01 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (2.1ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (4.1ms)
+  Rendered order/new.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 2155ms (Views: 2142.4ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:53:09 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (2.3ms)
+  Rendered order/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 2073ms (Views: 1974.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:53:22 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (6.6ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (76.4ms)
+  Rendered order/new.html.erb within layouts/application (77.6ms)
+Completed 200 OK in 2076ms (Views: 2049.7ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:53:38 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (11.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.5ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (7.0ms)
+  Rendered order/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 2043ms (Views: 2013.4ms | ActiveRecord: 11.9ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:53:51 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (4.9ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (2.2ms)
+  Rendered order/new.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 2093ms (Views: 2081.6ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:55:40 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (7.2ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.4ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (3.7ms)
+  Rendered order/new.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 2387ms (Views: 2369.8ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/order/2" for 127.0.0.1 at 2014-10-09 16:55:54 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"2"}
+  [1m[36mCustomer Load (10.9ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered order/_form.html.erb (6.9ms)
+  Rendered order/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 2144ms (Views: 2120.5ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-09 16:56:38 +1100
+Processing by SwimwearController#index as HTML
+  [1m[36mCustomer Load (0.8ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.0ms)[0m  SELECT "products".* FROM "products"
+  Rendered swimwear/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 206ms (Views: 194.8ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:56:41 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (0.3ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (3.7ms)
+  Rendered order/new.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 200ms (Views: 194.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:57:00 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (1.1ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (5.5ms)
+  Rendered order/new.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 275ms (Views: 261.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-09 16:58:07 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35mProduct Load (5.5ms)[0m  SELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered order/_form.html.erb (4.4ms)
+  Rendered order/new.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 2075ms (Views: 2062.6ms | ActiveRecord: 6.0ms)
