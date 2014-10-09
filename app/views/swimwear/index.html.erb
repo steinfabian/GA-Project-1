@@ -1,9 +1,12 @@
-<h2>Home page showing all products</h2>
+<h2>Select your favourite shape</h2>
 
 <!-- Show all available products from the database -->
 
 <% @products.each do |product| %>
 <ul>
-    <li><%= link_to(product.product_name, customise_path(product)) %></li>
+    <%= link_to(product.product_name, customise_path(product)) %>
+    <div>
+    <a href='/order/<%=product.id%>'><img src='assets/<%=product.id%>.png'></a>
+	</div>
 </ul>
 <% end %>

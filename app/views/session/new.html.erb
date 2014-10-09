@@ -1,9 +1,16 @@
-<%= form_tag '/login' do %>
-<%= label_tag :email %>
-<%= text_field_tag :email, nil, :autofocus => true %>
-<%= label_tag :password %>
-<%= password_field_tag :password %>
-<button>Login</button>
+
+<%= form_tag '/login' , :class => 'form-inline' do %>
+<div class="form-group">
+	<%= label_tag :email %>
+	<%= text_field_tag :email, nil, :autofocus => true, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= label_tag :password %>
+	<%= password_field_tag :password, nil, :class => 'form-control' %>
+</div>
+
+<button class='btn btn-primary'>Login</button>
 <% end %>
 
-Not a customer yet? Please <%= link_to 'register', register_path %>
+<p class="help-block">Not a customer yet? Please <%= link_to 'register', register_path %></p>

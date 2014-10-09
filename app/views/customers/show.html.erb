@@ -12,7 +12,7 @@
 <label>Suburb:</label> <%= @customer.suburb%></p>
 <label>Postcode:</label> <%= @customer.postcode%></p>
 
-<%= link_to 'Edit', edit_path(@customer) %>
+<%= link_to 'Edit', edit_path(@customer), :class => "help-block" %>
 
 <h3>These are your past orders:</h3>
 <!-- List orders. Find orders with this customer ID and display Order ID, date, and order specifications-->
