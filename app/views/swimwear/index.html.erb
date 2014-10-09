@@ -6,7 +6,8 @@
 <ul>
     <%= link_to(product.product_name, customise_path(product)) %>
     <div>
-    <a href='/order/<%=product.id%>'><img src='assets/<%=product.id%>.png'></a>
+    <a href='/order/<%=product.id%>'><img src='assets/<%=product.id%>.jpg' class="img-responsive"></a>
 	</div>
 </ul>
 <% end %>
+

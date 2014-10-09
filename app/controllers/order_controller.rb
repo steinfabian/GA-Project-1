@@ -21,6 +21,7 @@ class OrderController < ApplicationController
 
 	def checkout
 		@customer = @current_customer
+		@order = Order.find session[:order_id]
 	end
 
 	def complete

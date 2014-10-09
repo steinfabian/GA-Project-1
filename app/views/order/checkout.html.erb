@@ -1,18 +1,15 @@
 <h2>Order summary</h2>
 
 <p>Customer number: <%= @customer.id %></p>
-<p><%= @customer.first_name %></p>
-<p><%= @customer.last_name %></p>
-<p>Unit number: </p>
-<p><%= @customer.unit_number %></p>
-<p>Street number: </p>
-<p><%= @customer.street_number %></p>
-<p><%= @customer.street_name %></p>
-<p><%= @customer.suburb %></p>
-<p><%= @customer.postcode%></p>
+<p>Name: <%= @customer.first_name %> <%= @customer.last_name %></p>
+<p>Address: <%= @customer.unit_number %> <%= @customer.street_number %> <%= @customer.street_name %> <%= @customer.suburb %> <%= @customer.postcode%></p>
+<p>Top size: <%= @order.top_size %></p>
+<p>Top style: <%= @order.top_colour %></p>
+<p>Bottom size: <%= @order.bottom_size %></p>
+<p>Bottom style: <%= @order.bottom_colour %></p>
 
 
 <%= form_tag '/complete' do %>
-<button>Buy Now</button>
+<button class='btn btn-primary'>Buy Now</button>
 <% end %>
 
