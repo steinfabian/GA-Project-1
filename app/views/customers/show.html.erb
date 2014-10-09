@@ -31,7 +31,7 @@
     <tr>
     <th><%= order.id %></th>
     <th><%= order.created_at.strftime('%d %B %Y') %></th>
-    <th>Bikini</th>
+    <th><%= order.products.first.product_name %></th>
     <th><%= order.top_size%> </th>
     <th><%= order.top_colour%> </th>
     <th><%= order.bottom_size%> </th>
