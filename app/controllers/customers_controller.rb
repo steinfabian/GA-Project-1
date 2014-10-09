@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
 	def show
 		redirect_to login_path unless @current_customer
 		@customer = @current_customer
-		#define variable that looks up all order from customer with this id which have status confirmed
+		#define variable that looks up all orders from customer with this id which have status confirmed
 		@order_list = @customer.orders.where(:status => "confirmed")
 	end
 

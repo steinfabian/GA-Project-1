@@ -40326,3 +40326,327 @@ Processing by CustomersController#new as HTML
   Rendered customers/_form.html.erb (13.6ms)
   Rendered customers/new.html.erb within layouts/application (20.2ms)
 Completed 200 OK in 229ms (Views: 210.1ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-10 09:35:30 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SwimwearController#index as HTML
+  [1m[35mCustomer Load (0.9ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.8ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered swimwear/index.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 529ms (Views: 477.4ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-10 09:35:37 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[35mCustomer Load (2.6ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (1.8ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered order/_form.html.erb (52.4ms)
+  Rendered order/new.html.erb within layouts/application (59.8ms)
+Completed 200 OK in 336ms (Views: 301.2ms | ActiveRecord: 8.4ms)
+
+
+Started GET "/order/all" for 127.0.0.1 at 2014-10-10 09:35:39 +1100
+Processing by OrderController#index as HTML
+  [1m[35mCustomer Load (2.0ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mOrder Load (7.5ms)[0m  [1mSELECT "orders".* FROM "orders"[0m
+  Rendered order/index.html.erb within layouts/application (25.7ms)
+Completed 200 OK in 284ms (Views: 269.0ms | ActiveRecord: 9.5ms)
+  [1m[35mOrder Load (0.9ms)[0m  SELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1  [["id", 58]]
+  [1m[36mProduct Load (0.5ms)[0m  [1mSELECT  "products".* FROM "products" INNER JOIN "orders_products" ON "products"."id" = "orders_products"."product_id" WHERE "orders_products"."order_id" = $1 AND "products"."id" = $2 LIMIT 1[0m  [["order_id", 58], ["id", 1]]
+
+
+Started GET "/order/all" for 127.0.0.1 at 2014-10-10 09:43:06 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"all"}
+  [1m[35mCustomer Load (1.5ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.5ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 0]]
+Completed 500  in 43ms
+
+ActiveRecord::RecordNotFound - Couldn't find Product with 'id'=all:
+  activerecord (4.1.5) lib/active_record/relation/finder_methods.rb:320:in `raise_record_not_found_exception!'
+  activerecord (4.1.5) lib/active_record/relation/finder_methods.rb:420:in `find_one'
+  activerecord (4.1.5) lib/active_record/relation/finder_methods.rb:404:in `find_with_ids'
+  activerecord (4.1.5) lib/active_record/relation/finder_methods.rb:68:in `find'
+  activerecord (4.1.5) lib/active_record/querying.rb:3:in `find'
+   () home/fabian/GA_Project_1/app/controllers/order_controller.rb:5:in `new'
+  actionpack (4.1.5) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.1.5) lib/abstract_controller/base.rb:189:in `process_action'
+  actionpack (4.1.5) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.1.5) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:113:in `call'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.5) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.1.5) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.1.5) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.1.5) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.5) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.5) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.1.5) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.1.5) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.1.5) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.1.5) lib/abstract_controller/base.rb:136:in `process'
+  actionview (4.1.5) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.1.5) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.1.5) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.1.5) lib/action_controller/metal.rb:232:in `block in action'
+  actionpack (4.1.5) lib/action_dispatch/routing/route_set.rb:82:in `dispatch'
+  actionpack (4.1.5) lib/action_dispatch/routing/route_set.rb:50:in `call'
+  actionpack (4.1.5) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.5) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.5) lib/action_dispatch/routing/route_set.rb:678:in `call'
+  meta_request (0.3.4) lib/meta_request/middlewares/app_request_handler.rb:13:in `call'
+  meta_request (0.3.4) lib/meta_request/middlewares/meta_request_handler.rb:13:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.5) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.5) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.5) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.5) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.0.0) lib/better_errors/middleware.rb:57:in `call'
+  rack-contrib (1.1.0) lib/rack/contrib/response_headers.rb:17:in `call'
+  meta_request (0.3.4) lib/meta_request/middlewares/headers.rb:16:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.5) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.0.3) lib/quiet_assets.rb:23:in `call_with_quiet_assets'
+  actionpack (4.1.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.5) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.5) lib/rails/engine.rb:514:in `call'
+  railties (4.1.5) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+   () home/fabian/.rvm/rubies/ruby-2.0.0-p481/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+   () home/fabian/.rvm/rubies/ruby-2.0.0-p481/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+   () home/fabian/.rvm/rubies/ruby-2.0.0-p481/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/80f0fb48f7a1a8a3/variables" for 127.0.0.1 at 2014-10-10 09:43:06 +1100
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-10 09:43:09 +1100
+Processing by SwimwearController#index as HTML
+  [1m[35mCustomer Load (0.6ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered swimwear/index.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 232ms (Views: 227.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-10 09:43:10 +1100
+Processing by SwimwearController#index as HTML
+  [1m[35mCustomer Load (0.8ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered swimwear/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 219ms (Views: 214.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-10 09:43:11 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[35mCustomer Load (0.5ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.3ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered order/_form.html.erb (10.1ms)
+  Rendered order/new.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 160ms (Views: 152.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/order/1" for 127.0.0.1 at 2014-10-10 09:43:18 +1100
+Processing by OrderController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "order"=>{"top_colour"=>"Tropical", "bottom_colour"=>"Pineapple", "top_size"=>"S", "bottom_size"=>"M"}, "product_id"=>"1"}
+  [1m[35mCustomer Load (0.5ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (9.8ms)[0m  INSERT INTO "orders" ("bottom_colour", "bottom_size", "created_at", "top_colour", "top_size", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["bottom_colour", "Pineapple"], ["bottom_size", "M"], ["created_at", "2014-10-09 22:43:18.655099"], ["top_colour", "Tropical"], ["top_size", "S"], ["updated_at", "2014-10-09 22:43:18.655099"]]
+  [1m[36m (3.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 60[0m  [["status", "pending"], ["updated_at", "2014-10-09 22:43:18.689782"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "orders_products" ("order_id", "product_id") VALUES ($1, $2)[0m  [["order_id", 60], ["product_id", 1]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/login
+Completed 302 Found in 152ms (ActiveRecord: 22.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-10-10 09:43:18 +1100
+Processing by SessionController#new as HTML
+  [1m[36mCustomer Load (0.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  Rendered session/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 156ms (Views: 149.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2014-10-10 09:43:21 +1100
+Processing by CustomersController#new as HTML
+  [1m[35mCustomer Load (2.4ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  Rendered customers/_form.html.erb (116.2ms)
+  Rendered customers/new.html.erb within layouts/application (118.7ms)
+Completed 200 OK in 293ms (Views: 266.7ms | ActiveRecord: 16.2ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2014-10-10 09:43:38 +1100
+Processing by CustomersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "customer"=>{"first_name"=>"Fabian", "last_name"=>"Test", "unit_number"=>"6", "street_number"=>"5", "street_name"=>"Norton St", "suburb"=>"Glebe", "postcode"=>"2037", "email"=>"fabian@fabianstein.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mCustomer Load (1.7ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  BEGIN
+  [1m[36mSQL (2.3ms)[0m  [1mINSERT INTO "customers" ("created_at", "email", "first_name", "last_name", "password_digest", "postcode", "street_name", "street_number", "suburb", "unit_number", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", "2014-10-09 22:43:38.909962"], ["email", "fabian@fabianstein.com"], ["first_name", "Fabian"], ["last_name", "Test"], ["password_digest", "$2a$10$VcvmrSn1Yze9gNQizyUC6OgvrQUzNoSlxHRXdX/YTo14I9u14PVti"], ["postcode", "2037"], ["street_name", "Norton St"], ["street_number", "5"], ["suburb", "Glebe"], ["unit_number", "6"], ["updated_at", "2014-10-09 22:43:38.909962"]]
+  [1m[35m (2.9ms)[0m  COMMIT
+  [1m[36mOrder Load (0.4ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 60]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "orders" SET "customer_id" = $1, "updated_at" = $2 WHERE "orders"."id" = 60[0m  [["customer_id", 19], ["updated_at", "2014-10-09 22:43:38.927051"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Redirected to http://localhost:3000/order/60/checkout
+Completed 302 Found in 183ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/order/60/checkout" for 127.0.0.1 at 2014-10-10 09:43:38 +1100
+Processing by OrderController#checkout as HTML
+  Parameters: {"id"=>"60"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 19 LIMIT 1[0m
+  [1m[35mOrder Load (0.4ms)[0m  SELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1  [["id", 60]]
+  Rendered order/checkout.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 204ms (Views: 197.1ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/complete" for 127.0.0.1 at 2014-10-10 09:43:42 +1100
+Processing by OrderController#complete as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw="}
+  [1m[36mCustomer Load (2.3ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 19 LIMIT 1[0m
+  [1m[35mCustomer Load (1.4ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = $1 LIMIT 1  [["id", 19]]
+  [1m[36mOrder Load (1.3ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 60]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 60[0m  [["status", "confirmed"], ["updated_at", "2014-10-09 22:43:42.697845"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  Rendered order/complete.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 191ms (Views: 157.0ms | ActiveRecord: 7.2ms)
+
+
+Started DELETE "/login" for 127.0.0.1 at 2014-10-10 09:43:54 +1100
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw="}
+  [1m[36mCustomer Load (0.6ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 19 LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-10-10 09:43:54 +1100
+Processing by SwimwearController#index as HTML
+  [1m[35mCustomer Load (0.5ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (2.0ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered swimwear/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 246ms (Views: 237.7ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/order/1" for 127.0.0.1 at 2014-10-10 09:43:56 +1100
+Processing by OrderController#new as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[35mCustomer Load (0.4ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36mProduct Load (0.5ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered order/_form.html.erb (2.4ms)
+  Rendered order/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 202ms (Views: 142.5ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/order/1" for 127.0.0.1 at 2014-10-10 09:43:59 +1100
+Processing by OrderController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "order"=>{"top_colour"=>"Geo", "bottom_colour"=>"Geo", "top_size"=>"S", "bottom_size"=>"S"}, "product_id"=>"1"}
+  [1m[35mCustomer Load (2.2ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  [1m[36m (1.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (4.8ms)[0m  INSERT INTO "orders" ("bottom_colour", "bottom_size", "created_at", "top_colour", "top_size", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["bottom_colour", "Geo"], ["bottom_size", "S"], ["created_at", "2014-10-09 22:43:59.024517"], ["top_colour", "Geo"], ["top_size", "S"], ["updated_at", "2014-10-09 22:43:59.024517"]]
+  [1m[36m (3.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 61[0m  [["status", "pending"], ["updated_at", "2014-10-09 22:43:59.039367"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36mProduct Load (1.2ms)[0m  [1mSELECT  "products".* FROM "products"  WHERE "products"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "orders_products" ("order_id", "product_id") VALUES ($1, $2)[0m  [["order_id", 61], ["product_id", 1]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/login
+Completed 302 Found in 51ms (ActiveRecord: 17.2ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-10-10 09:43:59 +1100
+Processing by SessionController#new as HTML
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  Rendered session/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 207ms (Views: 203.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2014-10-10 09:44:00 +1100
+Processing by CustomersController#new as HTML
+  [1m[35mCustomer Load (2.3ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1
+  Rendered customers/_form.html.erb (2.3ms)
+  Rendered customers/new.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 221ms (Views: 210.2ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/register" for 127.0.0.1 at 2014-10-10 09:44:09 +1100
+Processing by CustomersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw=", "customer"=>{"first_name"=>"Fabian", "last_name"=>"Test", "unit_number"=>"6", "street_number"=>"5", "street_name"=>"Norton St", "suburb"=>"Glebe", "postcode"=>"2037", "email"=>"fabian@fabianstein.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mCustomer Load (2.2ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "customers" ("created_at", "email", "first_name", "last_name", "password_digest", "postcode", "street_name", "street_number", "suburb", "unit_number", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", "2014-10-09 22:44:09.853745"], ["email", "fabian@fabianstein.com"], ["first_name", "Fabian"], ["last_name", "Test"], ["password_digest", "$2a$10$V4EMQfCyBKUE9D1S4CFVv.oJFrO3rsJBB9/kh/pTNwg/4uefFfpm2"], ["postcode", "2037"], ["street_name", "Norton St"], ["street_number", "5"], ["suburb", "Glebe"], ["unit_number", "6"], ["updated_at", "2014-10-09 22:44:09.853745"]]
+  [1m[35m (1.5ms)[0m  COMMIT
+  [1m[36mOrder Load (0.4ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 61]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "orders" SET "customer_id" = $1, "updated_at" = $2 WHERE "orders"."id" = 61[0m  [["customer_id", 20], ["updated_at", "2014-10-09 22:44:09.918633"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/order/61/checkout
+Completed 302 Found in 212ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/order/61/checkout" for 127.0.0.1 at 2014-10-10 09:44:09 +1100
+Processing by OrderController#checkout as HTML
+  Parameters: {"id"=>"61"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 20 LIMIT 1[0m
+  [1m[35mOrder Load (0.3ms)[0m  SELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1  [["id", 61]]
+  Rendered order/checkout.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 158ms (Views: 151.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/complete" for 127.0.0.1 at 2014-10-10 09:44:11 +1100
+Processing by OrderController#complete as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"42zGTLKJmjPi9SOfHxaz4MeQBlYvI+NWIBFgtHxhLXw="}
+  [1m[36mCustomer Load (2.5ms)[0m  [1mSELECT  "customers".* FROM "customers"  WHERE "customers"."id" = 20 LIMIT 1[0m
+  [1m[35mCustomer Load (3.1ms)[0m  SELECT  "customers".* FROM "customers"  WHERE "customers"."id" = $1 LIMIT 1  [["id", 20]]
+  [1m[36mOrder Load (0.4ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 61]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "orders" SET "status" = $1, "updated_at" = $2 WHERE "orders"."id" = 61[0m  [["status", "confirmed"], ["updated_at", "2014-10-09 22:44:11.903487"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+  Rendered order/complete.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 221ms (Views: 142.6ms | ActiveRecord: 8.1ms)
+  [1m[35mOrder Load (1.6ms)[0m  SELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1  [["id", 58]]
+  [1m[36mProduct Load (0.7ms)[0m  [1mSELECT  "products".* FROM "products" INNER JOIN "orders_products" ON "products"."id" = "orders_products"."product_id" WHERE "orders_products"."order_id" = $1 AND "products"."id" = $2 LIMIT 1[0m  [["order_id", 58], ["id", 1]]
+  [1m[35mCustomer Load (0.8ms)[0m  SELECT "customers".* FROM "customers"
+  [1m[36mOrder Load (0.4ms)[0m  [1mSELECT  "orders".* FROM "orders"  WHERE "orders"."id" = $1 LIMIT 1[0m  [["id", 58]]
+  [1m[35mProduct Load (0.9ms)[0m  SELECT  "products".* FROM "products" INNER JOIN "orders_products" ON "products"."id" = "orders_products"."product_id" WHERE "orders_products"."order_id" = $1 AND "products"."id" = $2 LIMIT 1  [["order_id", 58], ["id", 1]]
