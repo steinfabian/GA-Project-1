@@ -1,3 +1,10 @@
+<div class="preview">
+  <div class="top">
+  </div>
+
+  <div class="bottom">
+  </div>
+</div>
 
 <%= form_for @order do |f| %>
 
@@ -19,3 +26,28 @@
 </div>
 
 <% end %>
+
+<script>
+  $(document).ready(function () {
+  	<% if params[:product_id] == '1' %>
+  	var kind = 'triangle';
+  	<% else %>
+  	var kind = 'bandeau';
+  	<% end %>
+  	$('#order_top_colour').on('change', function () {
+  		var colour = $(this).val();
+  		var $img = $('<img>');
+  		$img.attr('src', '/assets/' + kind + '_top_' + colour.toLowerCase() + '.png');
+  		$('.preview .top').html($img);
+  	}).trigger('change');
+
+  	$('#order_bottom_colour').on('change', function () {
+  		var colour = $(this).val();
+  		var $img = $('<img>');
+  		$img.attr('src', '/assets/' + kind + '_bottom_' + colour.toLowerCase() + '.png');
+  		$('.preview .bottom').html($img);
+  	}).trigger('change');
+
+
+  });
+</script>
