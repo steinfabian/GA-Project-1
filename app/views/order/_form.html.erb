@@ -10,20 +10,32 @@
 
 <div class="form-group" id="cust_form">
 	<ul>
-		<li><%= f.label :top_size, 'Select your top size', :class => 'cust_label' %>
-			<%= f.select :top_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]) %>
-		<li><%= f.label :top_colour, 'Select your top style', :class => 'cust_label' %>
-			<%= f.select :top_colour, options_for_select([['Geo','Geo'],['Pineapple','Pineapple'],['Tropical','Tropical']]) %>
-		<li><%= f.label :bottom_size, 'Select your bottom size', :class => 'cust_label' %>
-			<%= f.select :bottom_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]) %>
-		<li><%= f.label :bottom_colour, 'Select your bottom style', :class => 'cust_label' %>
-			<%= f.select :bottom_colour, options_for_select([['Geo','Geo'],['Pineapple','Pineapple'],['Tropical','Tropical']]) %>
+    <% if params[:product_id] == '1' %>
+    		<li><%= f.label :top_colour, 'Select your top style', :class => 'cust_label' %>
+    			<%= f.select :top_colour, options_for_select([['Geo','Geo'],['Pineapple','Pineapple'],['Tropical','Tropical']]) %>
+    		<li><%= f.label :bottom_colour, 'Select your bottom style', :class => 'cust_label' %>
+    			<%= f.select :bottom_colour, options_for_select([['Geo','Geo'],['Pineapple','Pineapple'],['Tropical','Tropical']]) %>
+      <% else %>
+        <li><%= f.label :top_colour, 'Select your top style', :class => 'cust_label' %>
+          <%= f.select :top_colour, options_for_select([['Floral','Floral'],['Ice-Cream','Ice-Cream'],['Retro','Retro']]) %>
+        
+        <li><%= f.label :bottom_colour, 'Select your bottom style', :class => 'cust_label' %>
+          <%= f.select :bottom_colour, options_for_select([['Floral','Floral'],['Ice-Cream','Ice-Cream'],['Retro','Retro']]) %>
+      <% end %>
+
+        <li><%= f.label :top_size, 'Select your top size', :class => 'cust_label' %>
+        <%= f.select :top_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]) %>
+        <li><%= f.label :bottom_size, 'Select your bottom size', :class => 'cust_label' %>
+        <%= f.select :bottom_size, options_for_select([['Small','S'],['Medium','M'],['Large','L']]) %>
 	</ul>
+
+  <div id='checkout_button'>
+    <button class='btn btn-primary'>Checkout</button>
+  </div>
+
 </div>
 
-<div id='checkout_button'>
-	<button class='btn btn-primary'>Checkout</button>
-</div>
+
 
 <% end %>
 

@@ -1,21 +1,33 @@
 body {
-   margin: 0;
   padding-top: 4em	;
   padding-left: 3em;
  }
 
  img {
- 	width: 30%;
- 	height: 30%;
+ 	width: 50%;
+ 	height: 50%;
  }
 
  ul {
  	display: inline-block;
  }
 
+ h2 {
+ 	padding-bottom: 0.5em;
+ }
+
+ h3 {
+ 	padding-bottom: 0.5em;
+ }
+
  #checkout_button {
  	position: relative;
- 	left: 2.7em;
+ 	left: 18em;
+ }
+
+ .button_edit {
+ 	margin-left: 0.5em;
+ 	margin-bottom: 2em;
  }
 
  .cust_select {
@@ -24,15 +36,55 @@ body {
 
  #cust_form {
  	margin-top: 2em;
+ 	float: top;
  	position: relative;
-
+ 	left: 25em;
+ 	top: -25em;
  }
+
+ .help-block {
+ 	margin-left: 0.5em;
+ }
+
+.login_block {
+	margin-top: 2em;
+}
+
+.form-group {
+	margin-right: 1em;
+}
+
+.form-control {
+	margin-left: 0.5em;
+}
 
  li {
  	list-style-type: none;
  }
 
+label {
+	margin-left: 0.5em;
+}
+
+.checkout_label {
+	width: 10em;
+}
+
+ .input-group {
+ 	margin-bottom: 1em;
+ }
+
  .preview {
- 	display:inline-block;
- 	width:400px;
+ 	display: inline-block;
+ 	width: 400px;
+ 	margin-left: 5em;
+ }
+
+ .cust_label {
+ 	width: 200px;
+ 	margin-bottom: 1em;
+ }
+
+ .bottom {
+ 	margin-top: 3em;
  }

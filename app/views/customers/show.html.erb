@@ -2,22 +2,22 @@
 
 <h3>These are your account details:</h3>
 
-<label>Customer number:</label> <%= @customer.id %></p>
-<label>First name:</label> <%= @customer.first_name %></p>
-<label>Last name:</label> <%= @customer.last_name %></p>
-<label>Email:</label> <%= @customer.email %></p>
-<label>Unit number:</label> <%= @customer.unit_number %></p>
-<label>Street number:</label> <%= @customer.street_number %></p>
-<label>Street name:</label> <%= @customer.street_name %></p>
-<label>Suburb:</label> <%= @customer.suburb%></p>
-<label>Postcode:</label> <%= @customer.postcode%></p>
+<label class="checkout_label">Customer number:</label> <%= @customer.id %></p>
+<label class="checkout_label">First name:</label> <%= @customer.first_name %></p>
+<label class="checkout_label">Last name:</label> <%= @customer.last_name %></p>
+<label class="checkout_label">Email:</label> <%= @customer.email %></p>
+<label class="checkout_label">Unit number:</label> <%= @customer.unit_number %></p>
+<label class="checkout_label">Street number:</label> <%= @customer.street_number %></p>
+<label class="checkout_label">Street name:</label> <%= @customer.street_name %></p>
+<label class="checkout_label">Suburb:</label> <%= @customer.suburb%></p>
+<label class="checkout_label">Postcode:</label> <%= @customer.postcode%></p>
 
 <%= link_to 'Edit', edit_path(@customer), :class => "help-block" %>
 
 <h3>These are your past orders:</h3>
 <!-- List orders. Find orders with this customer ID and display Order ID, date, and order specifications-->
 
-<table>
+<table class="table">
   <tr>
     <th>Order number</th>
     <th>Date</th>

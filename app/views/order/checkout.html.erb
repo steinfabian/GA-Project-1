@@ -1,12 +1,12 @@
 <h2>Order summary</h2>
 
-<p>Customer number: <%= @customer.id %></p>
-<p>Name: <%= @customer.first_name %> <%= @customer.last_name %></p>
-<p>Address: <%= @customer.unit_number %> <%= @customer.street_number %> <%= @customer.street_name %> <%= @customer.suburb %> <%= @customer.postcode%></p>
-<p>Top size: <%= @order.top_size %></p>
-<p>Top style: <%= @order.top_colour %></p>
-<p>Bottom size: <%= @order.bottom_size %></p>
-<p>Bottom style: <%= @order.bottom_colour %></p>
+<label class="checkout_label">Customer number: </label><%= @customer.id %></p>
+<label class="checkout_label">Name: </label><%= @customer.first_name %> <%= @customer.last_name %></p>
+<label class="checkout_label">Address: </label><%= @customer.unit_number %>/<%= @customer.street_number %> <%= @customer.street_name %> <%= @customer.suburb %> <%= @customer.postcode%></p>
+<label class="checkout_label">Top size: </label><%= @order.top_size %></p>
+<label class="checkout_label">Top style: </label><%= @order.top_colour %></p>
+<label class="checkout_label">Bottom size: </label><%= @order.bottom_size %></p>
+<label class="checkout_label">Bottom style: </label><%= @order.bottom_colour %></p>
 
 
 <%= form_tag '/complete' do %>
